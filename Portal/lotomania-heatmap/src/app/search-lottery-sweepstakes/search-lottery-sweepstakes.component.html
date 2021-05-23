@@ -1,0 +1,17 @@
+<div class="container left-bar">
+    <h3>{{'Lotomania Análise' | uppercase}}</h3>
+    <form (ngSubmit)="search()" #searchLotteryForm="ngForm">
+        <div class="mb-3">
+            <label for="inputLotteryNumber" class="form-label">Número do sorteio</label>
+            <input type="number" min="0" class="form-control" id="inputLotteryNumber" aria-describedby="lotteryNumber" [(ngModel)]="lotteryNumber" name="lNumber"
+            #lNumber="ngModel">
+            <small><div id="lotteryNumber" class="form-text">Informe o número do último sorteio</div></small>
+        </div>
+        <div class="mb-3">
+            <label for="inputLotteryQtd" class="form-label">Quantidade de sorteios</label>
+            <input type="number" min="1" class="form-control" id="inputLotteryQtd" [(ngModel)]="lotteryQtd" name="lQtd"
+            #lQtd="ngModel">
+        </div>
+        <button type="submit" class="btn btn-primary">Gerar</button>
+    </form>
+</div>
