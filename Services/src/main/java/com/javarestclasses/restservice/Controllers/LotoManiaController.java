@@ -8,6 +8,8 @@ import com.javarestclasses.restservice.models.LotoManiaSorteio;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -46,5 +48,25 @@ public class LotoManiaController {
 
 		return sorteio;
 	}
+	
+	@GetMapping("/lotomania/sorteio/ultimo")
+	public Integer ultimoNumeroSorteio() { 
+		return lastDrawNumber();
+	}
+	
+	private Integer lastDrawNumber() {
+		String url = "https://www.sorteonline.com.br/lotomania/resultados";
+		String html = Unirest.get(url).asString().getBody().toString();
+		
+		Pattern p = Pattern.compile("concurso-numero\">\\d{4}");
+		Matcher m = p.matcher(html);
+		if(m.find()) {
+			String result = m.group().replace("concurso-numero\">", "");
+			return Integer.parseInt(result);
+		}
+		
+		return 0;
+	}
+	
 
 }

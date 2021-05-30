@@ -12,4 +12,8 @@ export class LotomaniaServiceService {
   getSweepstakes(numConcurso:number, qtdConcursos:number){
     return this.http.get<ISweepstakes>("/lotomania/sorteios?qtdConcursos="+qtdConcursos+"&numeroConcurso="+numConcurso)
   }
+
+  getLastDrawNumber(){
+    return this.http.get<number>("/lotomania/sorteio/ultimo")
+  }
 }

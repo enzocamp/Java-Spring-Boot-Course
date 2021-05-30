@@ -10,13 +10,18 @@ export class SearchLotterySweepstakesComponent implements OnInit {
   lotteryNumber: number;
   lotteryQtd: number;
 
-  constructor(private lotomaniService: LotomaniaServiceService) { }
+  constructor(private lotomaniaService: LotomaniaServiceService) { }
 
   ngOnInit(): void {
+    this.lotomaniaService.getLastDrawNumber().subscribe(
+      (result) => {
+        this.lotteryNumber = result;
+        console.log(result);
+      }
+    )
   }
-
-  search(){
-    this.lotomaniService.getSweepstakes(this.lotteryNumber, this.lotteryQtd).subscribe((result) => {
+  search() {
+    this.lotomaniaService.getSweepstakes(this.lotteryNumber, this.lotteryQtd).subscribe((result) => {
       console.log(result)
     })
   }
