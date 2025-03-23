@@ -69,6 +69,15 @@ public class Order {
 		return sum;
 	}
 	
+	/*utilizando lambda
+	 * 
+	 * public Double total() {
+    return items.stream()
+                .mapToDouble(OrderItem::subTotal)
+                .sum();
+}
+	 */
+	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
