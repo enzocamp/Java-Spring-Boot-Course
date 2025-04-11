@@ -55,6 +55,8 @@ public class Club {
 				Integer goals = Integer.parseInt(fields[1]);
 				
 				players.add(new Player(name,goals));
+				
+				line = br.readLine();
 			}
 		}
 		catch (IOException e) {

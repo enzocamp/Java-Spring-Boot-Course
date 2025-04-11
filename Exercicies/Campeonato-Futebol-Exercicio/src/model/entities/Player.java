@@ -35,6 +35,4 @@ public class Player {
 		this.club = club;
 	}
 
-	
-	
 }

@@ -40,6 +40,12 @@ public class FootballMatch {
 
 		for (Match match : matches) {
 		    System.out.println(String.format("%s \nWinner: %s\n", match.getResult(), match.getWinner()));
+		    match.writeGoalsToPlayer();
+		    match.getClubA().getPlayers().forEach((p) -> {
+		    	if(p.getGoals() > 0)
+		    	System.out.println(String.format("Jogador: %s \nGols: %d \nTotal Gols:%d \n",
+		    			p.getName(), p.getGoals(), match.getClubA().getGoals()));
+		    });
 		}
 		
 		System.out.println();
