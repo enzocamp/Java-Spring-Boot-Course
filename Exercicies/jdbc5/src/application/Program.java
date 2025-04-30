@@ -15,8 +15,6 @@ import db.DB;
 public class Program {
 
 	public static void main(String[] args) {
-			
-		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		
 		Connection conn = null;
 		
@@ -26,35 +24,26 @@ public class Program {
 			conn = DB.getConnection();
 			
 			st = conn.prepareStatement(
-					"INSERT INTO seller "
-					+ "(Name, Email, BirthDate, BaseSalary, DepartmentId) "
-					+ "VALUES "
-					+ "(?, ?, ?, ?, ?)",
-					Statement.RETURN_GENERATED_KEYS);
+					"DELETE FROM department "
+					+ "WHERE "
+					+ "Id = ?"
+					);
 			
-			st.setString(1, "Carl Seigan");
-			st.setString(2, "carl@gmail.com");
-			st.setDate(3, java.sql.Date.valueOf(LocalDate.parse("22/04/1995", fmt)));
-			st.setDouble(4, 3000.0);
-			st.setInt(5, 4);
+			st.setInt(1, 2); // deletando na linha 1 , o registro com Id 5
+
 			
 			int rowsAffected = st.executeUpdate();
 		
 			if(rowsAffected > 0) {
 				ResultSet rs = st.getGeneratedKeys();
-				while(rs.next()) {
-					int id = rs.getInt(1);
-					System.out.println("Done! Id = " + id);
-				}
 			}
 			else {
 				System.out.println("No rows affected");
 			}
 			
-			System.out.println("Done! Rows Aggected: " + rowsAffected);
 		}
 		catch(SQLException e){
-			e.printStackTrace();
+			e.printStackTrace(); // aqui se desse um erro por conter chave estrangeira, ele só imprimiria o stacktrace
 		}
 
 		finally {
