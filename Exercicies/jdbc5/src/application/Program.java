@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import db.DB;
+import db.DbIntegrityException;
 
 public class Program {
 
@@ -43,7 +44,7 @@ public class Program {
 			
 		}
 		catch(SQLException e){
-			e.printStackTrace(); // aqui se desse um erro por conter chave estrangeira, ele só imprimiria o stacktrace
+			throw new DbIntegrityException(e.getMessage()); // Alterando para exceção personalizada
 		}
 
 		finally {
